@@ -2,22 +2,37 @@ import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 
 describe('App', () => {
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [App]
     }).compileComponents();
   });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render TaskFlow title', () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+
+    fixture.detectChanges();
+
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, taskflow');
+
+    expect(compiled.querySelector('h1')?.textContent)
+      .toContain('TaskFlow');
   });
+
+  it('should rename the title', () => {
+    const fixture = TestBed.createComponent(App);
+    const component = fixture.componentInstance;
+
+    component.rename();
+
+    expect(component.title).toBe('Mes tâches');
+  });
+
 });

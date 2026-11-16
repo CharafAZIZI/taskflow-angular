@@ -1,0 +1,65 @@
+
+<section class="task-container">
+
+  <div class="task-heading">
+    <div>
+      <h2>Ma liste de tâches</h2>
+      <p>Organisez et suivez vos activités.</p>
+    </div>
+
+    <span class="task-count">
+      {{ tasks.length }} tâche(s)
+    </span>
+  </div>
+
+  @if (tasks.length === 0) {
+
+    <div class="empty-state">
+      <h3>Aucune tâche disponible</h3>
+      <p>Votre liste est actuellement vide.</p>
+      <button (click)="restoreTasks()">
+        Restaurer les tâches
+      </button>
+    </div>
+
+  } @else {
+
+    <div class="task-list">
+
+      @for (task of tasks; track task.id) {
+
+        <article class="task-card"
+          [style.border-left-color]="task.id | taskColor">
+
+          <div class="task-information">
+
+            <h3 [style.color]="task.id | taskColor">
+              {{ task.title | uppercase }}
+            </h3>
+
+            <p>
+              Date limite :
+              {{ task.dueDate | date:'dd/MM/yyyy' }}
+            </p>
+
+          </div>
+
+          <span class="task-id">
+            #{{ task.id }}
+          </span>
+
+        </article>
+
+      }
+
+    </div>
+
+    <div class="task-actions">
+      <button class="clear-button" (click)="clearTasks()">
+        Supprimer toutes les tâches
+      </button>
+    </div>
+
+  }
+
+</section>
